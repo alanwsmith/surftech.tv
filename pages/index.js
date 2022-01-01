@@ -192,6 +192,9 @@ export default function Home() {
           width: 640,
           height: 390,
           videoId: activeVideo,
+          playerVars: {
+            modestbranding: 1,
+          },
           events: {
             onReady: handlePlayerReady,
           },
@@ -246,6 +249,23 @@ export default function Home() {
 
   return (
     <>
+      <div className="bg-gray-800 text-sm text-right text-gray-400 pr-2">
+        From{' '}
+        <a className="text-blue-400" href="https://twitter.com/TheIdOfAlan">
+          Alan W. Smith
+        </a>{' '}
+        (who has a{' '}
+        <a
+          className="text-blue-400"
+          href="https://www.alanwsmith.com/the-pod-of-alan"
+        >
+          podcast
+        </a>
+        ) for{' '}
+        <a className="text-blue-400" href="https://dusty.domains/">
+          Dusty Domains 2021
+        </a>
+      </div>
       <div className="max-w-2xl mx-auto">
         <h1>SurfTech.tv</h1>
         <p>A random tech video to watch without having to think about it</p>
