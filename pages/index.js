@@ -5,23 +5,23 @@ var player
 export default function Home() {
   const [initialized, setInitialized] = useState(false)
   const [playerReady, setPlayerReady] = useState(false)
+  const tmpVideoIds = [
+    'kYAtt3CUN-Y',
+    'JDdR94w8-7Q',
+    'JtwHtfFe6AI',
+    '6JNwK6hEneg',
+    'f7s8_PGpVT0',
+    'R-YX_7-7dm0',
+    'lQLsswJHa_c',
+    'DC9032_nkyc',
+    'Jk75JtXACL8',
+    'woXnRQR8dQ4',
+    'ELdFoIYTBL8',
+  ]
   useEffect(() => {
     if (!initialized) {
       console.log('Initializing...')
       setInitialized(true)
-      const tmpVideoIds = [
-        'kYAtt3CUN-Y',
-        'JDdR94w8-7Q',
-        'JtwHtfFe6AI',
-        '6JNwK6hEneg',
-        'f7s8_PGpVT0',
-        'R-YX_7-7dm0',
-        'lQLsswJHa_c',
-        'DC9032_nkyc',
-        'Jk75JtXACL8',
-        'woXnRQR8dQ4',
-        'ELdFoIYTBL8',
-      ]
       let activeVideo = localStorage.getItem('activeVideo')
       if (activeVideo !== null) {
         console.log(`Reloading activeVideo: ${activeVideo}`)
