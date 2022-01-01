@@ -96,10 +96,6 @@ export default function Home() {
     // console.log(player.getCurrentTime())
   }
 
-  if (typeof window !== 'undefined') {
-    localStorage.setItem('asdf', 'qweqweqw')
-  }
-
   return (
     <>
       <div className="max-w-2xl mx-auto">
