@@ -2,8 +2,18 @@
 @tailwind components;
 @tailwind utilities;
 
+@layer base {
+	body {
+		@apply text-lg;
+		@apply bg-black;
+		@apply text-red-700;
+	}
+	h1 {
+		@apply text-2xl;
+	}
+}
+
 .videoWrapper_16x9 {
-	background-color: blue;
 	position: relative;
 	padding-bottom: 56.25%; /* 16:9 */
 	padding-top: 25px;
