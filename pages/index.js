@@ -4,9 +4,11 @@ var player
 
 export default function Home() {
   const [initialized, setInitialized] = useState(false)
-  const [playerWrapper, setPlayerWrapper] = useState({})
+  const [playerReady, setPlayerReady] = useState(false)
   useEffect(() => {
     if (!initialized) {
+      console.log('Initializing...')
+      setInitialized(true)
       const tmpVideoIds = [
         'kYAtt3CUN-Y',
         'JDdR94w8-7Q',
@@ -20,15 +22,28 @@ export default function Home() {
         'woXnRQR8dQ4',
         'ELdFoIYTBL8',
       ]
-      setInitialized(true)
-      console.log('Initializing')
+      let activeVideo = localStorage.getItem('activeVideo')
+      if (activeVideo !== null) {
+        console.log(`Reloading activeVideo: ${activeVideo}`)
+      } else {
+        activeVideo =
+          tmpVideoIds[Math.floor(Math.random() * tmpVideoIds.length)]
+        localStorage.setItem('activeVideo', activeVideo)
+        console.log(`Setting activeVideo to: ${activeVideo}`)
+      }
+
+      // let startSeconds = localStorage.getItem(`startSecondsFor_${activeVideo}`)
+      // if (startSeconds === null) {
+      //   startSeconds = 0
+      // }
+
       var tag = document.createElement('script')
       tag.src = 'https://www.youtube.com/iframe_api'
       window.onYouTubeIframeAPIReady = function () {
         player = new window.YT.Player('player', {
           width: 640,
           height: 390,
-          videoId: tmpVideoIds[Math.floor(Math.random() * tmpVideoIds.length)],
+          videoId: activeVideo,
           events: {
             onReady: handlePlayerReady,
             onStateChange: handlePlayerStateChange,
@@ -43,23 +58,40 @@ export default function Home() {
   // useEffect(() => {
   //   const interval = setInterval(() => {
   //     markTime()
-  //   }, 2e3)
+  //   }, 4e3)
   //   return () => clearInterval(interval)
   // })
 
-  function markTime() {
-    console.log('here')
-
-    // if (typeof player !== 'undefined') {
-    //   console.log(player.getCurrentTime())
-    // }
-  }
+  // // Add this back in if you need to keep track of
+  // // the video progress outside of what youtube does
+  // function markTime() {
+  //   if (playerReady) {
+  //     // TODO: Update the local storage with the time
+  //     // subtract 10 seconds so you get a little buffer when
+  //     // starting again
+  //     const currentTime = parseInt(player.getCurrentTime(), 10) - 10
+  //     const minTime = 10
+  //     if (currentTime > minTime) {
+  //       console.log(`Updating time to: ${currentTime}`)
+  //       localStorage.setItem(
+  //         `startSecondsFor_${localStorage.getItem('activeVideo')}`,
+  //         currentTime
+  //       )
+  //     } else {
+  //       console.log(
+  //         `Not updating time because ${currentTime} is less than ${minTime} seconds`
+  //       )
+  //     }
+  //   }
+  // }
 
   function handlePlayerReady() {
     console.log('Player Ready')
+    setPlayerReady(true)
   }
 
   function handlePlayerStateChange() {
+    // TODO: Fire a time update here.
     console.log('state change')
     // console.log(player.getCurrentTime())
   }
